@@ -1,7 +1,7 @@
 <?php
 namespace App\Enums;
 
-enum body_type: string
+enum body_types: string
 {
     case Slim_slender = 'slim slender';
     case Average_medium = 'average medium';

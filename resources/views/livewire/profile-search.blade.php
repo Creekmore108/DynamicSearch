@@ -6,11 +6,12 @@
                 <h2 class="text-2xl font-bold text-gray-800">Find Your Match</h2>
 
                 <!-- Saved Search Controls -->
-                <div class="flex space-x-2" x-data="{ showSaveModal: false }">
+                <div class="flex space-x-2">
                     @auth
                         <button
                             type="button"
-                            @click="showSaveModal = true"
+                            x-data=""
+                            @click="$dispatch('open-save-modal')"
                             class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition">
                             {{ $isEditingSearch ? 'Update Search' : 'Save Search' }}
                         </button>
@@ -24,6 +25,7 @@
 
                         <button
                             type="button"
+                            x-data=""
                             @click="$dispatch('open-help-modal')"
                             class="px-2 py-2 text-gray-500 hover:text-gray-700 transition"
                             title="Search Help">
@@ -36,6 +38,8 @@
 
                 <!-- Save Search Modal -->
                 <div
+                    x-data="{ showSaveModal: false }"
+                    @open-save-modal.window="showSaveModal = true"
                     x-show="showSaveModal"
                     style="display: none"
                     class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
@@ -158,15 +162,14 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Sexual Preference</label>
                     <div class="grid grid-cols-2 gap-2">
-
-                        @foreach($sexualPreferences as $name )
+                        @foreach(App\Enums\sexual_preferences::cases() as $case)
                             <label class="flex items-center space-x-2">
                                 <input
                                     type="checkbox"
                                     wire:model.live="sexualPreference"
-                                    value="{{ $name }}"
+                                    value="{{ $case->value }}"
                                     class="rounded text-purple-600 focus:ring-purple-500">
-                                <span>{{ $name->name }}</span>
+                                <span>{{ $case->label() }}</span>
                             </label>
                         @endforeach
                     </div>
@@ -176,14 +179,14 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Relationship Type</label>
                     <div class="grid grid-cols-2 gap-2">
-                        @foreach($relationshipTypes as $name )
+                        @foreach(App\Enums\relationship_types::cases() as $case)
                             <label class="flex items-center space-x-2">
                                 <input
                                     type="checkbox"
                                     wire:model.live="relationshipType"
-                                    value="{{ $name }}"
+                                    value="{{ $case->value }}"
                                     class="rounded text-purple-600 focus:ring-purple-500">
-                                <span>{{ $name }}</span>
+                                <span>{{ $case->label() }}</span>
                             </label>
                         @endforeach
                     </div>
@@ -213,12 +216,12 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Body Type</label>
                     <div class="grid grid-cols-2 gap-2">
-                        @foreach (App\Enums\body_type::cases() as $case)
+                        @foreach(App\Enums\body_types::cases() as $case)
                             <label class="flex items-center space-x-2">
                                 <input
                                     type="checkbox"
                                     wire:model.live="bodyType"
-                                    value="{{ $case->name }}"
+                                    value="{{ $case->value }}"
                                     class="rounded text-purple-600 focus:ring-purple-500">
                                 <span>{{ $case->label() }}</span>
                             </label>
@@ -261,7 +264,7 @@
                                 <input
                                     type="checkbox"
                                     wire:model.live="ethnicity"
-                                    value="{{ $case->name }}"
+                                    value="{{ $case->value }}"
                                     class="rounded text-purple-600 focus:ring-purple-500">
                                 <span>{{ $case->label() }}</span>
                             </label>

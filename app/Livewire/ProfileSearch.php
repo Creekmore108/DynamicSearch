@@ -261,22 +261,22 @@ class ProfileSearch extends Component
         $users = $query->paginate(12);
 
         // Get dropdown options from configuration or database
-        $bodyTypes = \App\Enums\body_type::cases();
-        $relationshipTypes = \App\Enums\relationship_types::cases();
+        $bodyTypes = \App\Enums\body_types::cases();
+        // $relationshipTypes = \App\Enums\relationship_types::cases();
         // dd($relationshipTypes);
-        $bodyTypes = \App\Enums\body_type::cases();
-        $ethnicities = \App\Enums\ethnicities::cases();
-        $spiritualBeliefs = \App\Enums\spiritual_beliefs::cases();
-        $sexualPreferences = \App\Enums\sexual_preferences::cases();
+        // $bodyTypes = \App\Enums\body_type::cases();
+        // $ethnicities = \App\Enums\ethnicities::cases();
+        // $spiritualBeliefs = \App\Enums\spiritual_beliefs::cases();
+        // $sexualPreferences = \App\Enums\sexual_preferences::cases();
 
 
         return view('livewire.profile-search', [
             'users' => $users,
-            'relationshipTypes' => $relationshipTypes,
+            // 'relationshipTypes' => $relationshipTypes,
             'bodyTypes' => $bodyTypes,
-            'ethnicities' => $ethnicities,
-            'spiritualBeliefs' => $spiritualBeliefs,
-            'sexualPreferences' => $sexualPreferences,
+            // 'ethnicities' => $ethnicities,
+            // 'spiritualBeliefs' => $spiritualBeliefs,
+            // 'sexualPreferences' => $sexualPreferences,
         ]);
     }
 }

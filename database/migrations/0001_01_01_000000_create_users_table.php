@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('height')->nullable();
             $table->string('spiritual_beliefs')->nullable();
             $table->string('smoking')->nullable();
-            $table->string('wants_children')->nullable();
+            $table->boolean('wants_children')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
